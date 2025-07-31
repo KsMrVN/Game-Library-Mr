@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Library</title>
+  <link rel="icon" href="WhatsApp Image 2025-07-30 at 23.23.03.jpeg" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background-color: antiquewhite;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .game-card {
+      max-width: 200px;
+      text-align: center;
+    }
+
+    .game-card img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .game-title {
+      margin-top: 10px;
+      font-weight: bold;
+      color: black;
+      display: block;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Game Library</h1>
+  <a href="about.html">О проекте</a>
+  <br><br>
+  <input type="text" id="searchInput" placeholder="Поиск игры...">
+
+  <div class="container" id="gameContainer">
+    <!-- Карточки -->
+    <div class="game-card" data-title="Dota 2">
+      <a href="https://store.steampowered.com/app/570/Dota_2/">
+        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg" alt="Dota 2">
+      </a>
+      <a class="game-title" href="https://store.steampowered.com/app/570/Dota_2/">Dota 2</a>
+      <button class="wishlist-btn">В желаемое</button>
+    </div>
+
+    <div class="game-card" data-title="Cyberpunk2077">
+      <a href="https://store.steampowered.com/app/1091500/Cyberpunk_2077/">
+        <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" alt="Cyberpunk 2077">
+      </a>
+      <a class="game-title" href="https://store.steampowered.com/app/1091500/Cyberpunk_2077/">Cyberpunk 2077</a>
+      <button class="wishlist-btn">В желаемое</button>
+    </div>
+
+    <div class="game-card" data-title="Max Payne 3">
+      <a href="https://store.steampowered.com/app/204100/Max_Payne_3/">
+        <img src="mp3.jpg" alt="Max Payne 3">
+      </a>
+      <a class="game-title" href="https://store.steampowered.com/app/204100/Max_Payne_3/">Max Payne 3</a>
+      <button class="wishlist-btn">В желаемое</button>
+    </div>
+
+    <div class="game-card" data-title="Human Fall Flat">
+      <a href="https://store.steampowered.com/app/477160/Human_Fall_Flat/">
+        <img src="header.jpg" alt="Human Fall Flat">
+      </a>
+      <a class="game-title" href="https://store.steampowered.com/app/477160/Human_Fall_Flat/">Human Fall Flat</a>
+      <button class="wishlist-btn">В желаемое</button>
+    </div>
+
+    <div class="game-card" data-title="Rust">
+      <a href="https://store.steampowered.com/app/252490/Rust/">
+        <img src="rust.jpg" alt="Rust">
+      </a>
+      <a class="game-title" href="https://store.steampowered.com/app/252490/Rust/">Rust</a>
+      <button class="wishlist-btn">В желаемое</button>
+    </div>
+
+    <div class="game-card" data-title="Marvel Rivals">
+      <a href="https://store.steampowered.com/app/2767030/Marvel_Rivals/">
+        <img src="marvel rivals.jpg" alt="Marvel Rivals">
+      </a>
+      <a class="game-title" href="https://store.steampowered.com/app/2767030/Marvel_Rivals/">Marvel Rivals</a>
+      <button class="wishlist-btn">В желаемое</button>
+    </div>
+
+    <div class="game-card" data-title="Elden Ring">
+      <a href="https://store.steampowered.com/app/1245620/ELDEN_RING/">
+        <img src="elden ring.jpg" alt="Elden Ring">
+      </a>
+      <a class="game-title" href="https://store.steampowered.com/app/1245620/ELDEN_RING/">Elden Ring</a>
+      <button class="wishlist-btn">В желаемое</button>
+    </div>
+  </div>
+
+  <h2>Список желаемого</h2>
+  <ul id="wishlist"></ul>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const wishlist = document.getElementById("wishlist");
+    const cards = document.querySelectorAll(".game-card");
+
+    const savedWishlist = JSON.parse(localStorage.getItem("wishlistItems")) || [];
+
+    // Загружаем список желаемого
+    savedWishlist.forEach(title => {
+      const li = document.createElement("li");
+      li.textContent = title;
+      wishlist.appendChild(li);
+    });
+
+    // Поиск
+    searchInput.addEventListener("input", () => {
+      const filter = searchInput.value.toLowerCase();
+      cards.forEach(card => {
+        const title = card.dataset.title.toLowerCase();
+        card.style.display = title.includes(filter) ? "block" : "none";
+      });
+    });
+
+    // Кнопки "В желаемое"
+    document.querySelectorAll(".wishlist-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const card = button.closest(".game-card");
+        const title = card.dataset.title;
+        if (!savedWishlist.includes(title)) {
+          savedWishlist.push(title);
+          const li = document.createElement("li");
+          li.textContent = title;
+          wishlist.appendChild(li);
+          localStorage.setItem("wishlistItems", JSON.stringify(savedWishlist));
+        }
+      });
+    });
+  </script>
+</body>
+</html>

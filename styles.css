@@ -1,0 +1,79 @@
+/* Основной стиль страницы */
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f2f2f2;
+}
+
+/* Стиль строки поиска */
+input#searchInput {
+  padding: 10px;
+  font-size: 16px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* Контейнер карточек */
+.container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Каждая карточка игры */
+.game-card {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 200px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.game-card:hover {
+  transform: scale(1.03);
+}
+
+/* Картинка игры */
+.game-card img {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
+/* Название игры */
+.game-title {
+  display: block;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+
+/* При наведении на ссылку */
+.game-title:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+#wishlist{
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+#wishlist li {
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.element {
+  background-color: rgb(252, 14, 14);
+}
